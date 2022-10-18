@@ -20,9 +20,9 @@ const Result = ():JSX.Element => {
 const respond = correct === 0 ? `You have 0% of right answers` : `You have ${correct}0% of right answers`;
 
     return(
-        <View style={[styles.root, {backgroundColor: 'red'}]}>
-            <Text style={{fontSize: 25}}>You have finished the trivia</Text>
-            <Text style={{fontSize: 25}}>{respond}</Text>
+        <View style={[styles.root, {backgroundColor: '#e8e1e9'}]}>
+            <Text style={{fontSize: 25, marginBottom: 25}}>You have finished the trivia</Text>
+            <Text style={{fontSize: 25, marginBottom: 25}}>{respond}</Text>
             <Button 
             onPress={resetHandler}
             title='Got it'/>

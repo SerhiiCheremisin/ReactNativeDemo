@@ -57,7 +57,7 @@ const aderHandler = ():void => {
 
     return(
         <Modal visible={isVisible} animationType='slide'>
-            <View style={styles.root}> 
+            <View style={[styles.root, {backgroundColor: '#e1e9e8'}]}> 
             <Text style={styles.text}>Add a new word</Text>
             <SafeAreaView>
                <TextInput 
@@ -75,13 +75,13 @@ const aderHandler = ():void => {
             </SafeAreaView>
             <View style={styles.helpButtons}>
             <Pressable
-            style={[commonButton, {width: 50, backgroundColor: 'blue'}]}
+            style={[commonButton, styles.additionalButtonStyles]}
             onPress={ () => heplButtonsHandler('š') }><Text style={styles.text}>š</Text></Pressable>
             <Pressable
-             style={[commonButton,  {width: 50, backgroundColor: 'blue'}]}
+             style={[commonButton, styles.additionalButtonStyles]}
             onPress={ () => heplButtonsHandler('ž') }><Text style={styles.text}>ž</Text></Pressable>
             <Pressable
-             style={[commonButton,  {width: 50, backgroundColor: 'blue'}]}
+             style={[commonButton, styles.additionalButtonStyles]}
             onPress={ () => heplButtonsHandler('č') }><Text style={styles.text}>č</Text></Pressable>
             </View>
             <Pressable
@@ -105,6 +105,11 @@ const styles = StyleSheet.create({
     width: 200
    },
    button: commonButton,
+   additionalButtonStyles : {
+    width: 55, 
+    height: 55, 
+    backgroundColor: 'blue'
+   },
    helpButtons : {
       width: 200,
       flexDirection: 'row',

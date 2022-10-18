@@ -22,44 +22,25 @@ const Todo = ():JSX.Element =>  {
   const todosList = useSelector( (state:RootState) => state.todoReducer.todos)
   const dispatch:AppDispatch = useDispatch();
 
-  const storeTodoData = async (list) => {
-    try {
-      const jsonValue = JSON.stringify(list);
-      await AsyncStorage.setItem('todoList', jsonValue);
-    } catch (e) {
-      console.log(e);
-    }
-  }
-  
-  const getTodoData = async () => {
-    try {
-      const jsonValue = await AsyncStorage.getItem('todoList')
-      return jsonValue != null ? JSON.parse(jsonValue) : null;
-    } catch(e) {
-      console.log(e);
-    }
-  }
-
   useEffect(() => {
     setStorageValue('todoList', JSON.stringify(todosList))
-    // storeTodoData(todosList);
   }, [todosList])
 
 useEffect(() => {
-  // getTodoData()
-  // .then( data => dispatch(setTodos(data)) );
   getStorageValue('todoList')
-  .then( todos => dispatch(setTodos(JSON.parse(todos)))
-
-  );
+  .then( todos => dispatch(setTodos(JSON.parse(todos))))
+  .catch( error => {
+    console.log(error.error)
+  })
  },[])
 
  useEffect(() => {
-  // getTodoData()
-  // .then( data => console.log(data));
   getStorageValue('todoList')
   .then(todos => console.log(JSON.parse(todos)))
+  .catch( error => {
+    console.log(error.error)
  })
+})
 
   const modalOpener = ():void => {
     setIsModalOpen(true);

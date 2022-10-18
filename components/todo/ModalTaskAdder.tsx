@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
    justifyContent: 'center',
   },
   textInput: {
+    width: 300,
     flexDirection: 'row',
     padding: 15,
     justifyContent: 'center',

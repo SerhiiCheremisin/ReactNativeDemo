@@ -29,16 +29,12 @@ useEffect(() => {
     shuffleThat();
 },[isGameEnded])
 
-    useEffect(() => {
-        console.log(shuffled[pace])
-    })
-
   const checkShuffle:string = shuffled !== undefined ? `Translate ${shuffled[pace]?.word} to English` : 'Something went wrong';
 
     return(
         <View style={[styles.root, {backgroundColor: 'teal', justifyContent: 'flex-start',}]}>
             <View style={{alignItems: 'center', marginBottom: 20}}>
-            <Text style={{marginBottom: 10}}>Welcome to the trivia</Text>
+            <Text style={{marginBottom: 10, fontSize: 25}}>Welcome to the trivia</Text>
             <Button onPress={() => dispatch(setGameStarted(false))} title='Cancel the trivia'/>
             </View>
            <View style={styles.triviaWrapper}>

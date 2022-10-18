@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
    taskWrapper : {
     width: 400,
     paddingTop: 10,
+    paddingHorizontal: 10,
    },
    taskItem : {
     flexDirection: 'row',

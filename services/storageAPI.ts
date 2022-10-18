@@ -1,6 +1,6 @@
 import * as SecureStore from 'expo-secure-store';
 
-export async function setStorageValue(key, value) {
+export async function setStorageValue(key:string, value:string):Promise<any> {
    try{
     await SecureStore.setItemAsync(key, value);
    }
@@ -9,7 +9,7 @@ export async function setStorageValue(key, value) {
    }
    }
  
-  export async function getStorageValue(key) {
+  export async function getStorageValue(key:string):Promise<any> {
     try{
         let result = await SecureStore.getItemAsync(key);
         if (result) {
