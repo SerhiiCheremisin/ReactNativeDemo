@@ -16,12 +16,12 @@ const WordGame = ():JSX.Element => {
         <Dictionary/>
     )
   }
-if (isGameOn && pace < 11) {
+if (isGameOn && pace < 10) {
   return (
     <Trivia/>
 )
 }
- if(pace > 10) {
+ if(isGameOn && pace === 10) {
   return (
    <Result/>
   )

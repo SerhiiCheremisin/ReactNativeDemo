@@ -17,11 +17,12 @@ const Result = ():JSX.Element => {
         dispatch(setIncorrect(0));
         dispatch(setGameStarted(false));
     }
+const respond = correct === 0 ? `You have 0% of right answers` : `You have ${correct}0% of right answers`;
 
     return(
         <View style={[styles.root, {backgroundColor: 'red'}]}>
             <Text style={{fontSize: 25}}>You have finished the trivia</Text>
-            <Text style={{fontSize: 25}}>{`You have ${correct}0% of right answers`}</Text>
+            <Text style={{fontSize: 25}}>{respond}</Text>
             <Button 
             onPress={resetHandler}
             title='Got it'/>

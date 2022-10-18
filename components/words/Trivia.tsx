@@ -12,6 +12,7 @@ const Trivia = ():JSX.Element => {
     const dictionary = useSelector( (state:RootState) => state.wordsReducer.words);
     const pace = useSelector( (state:RootState) => state.wordsReducer.pace);
     const shuffled = useSelector( (state:RootState) => state.wordsReducer.shuffeledWords);
+    const isGameEnded = useSelector( (state:RootState) => state.wordsReducer.isGameStarted);
 
     const dispatch:AppDispatch = useDispatch()
 
@@ -24,25 +25,27 @@ const Trivia = ():JSX.Element => {
         shuffleThat();
     }, [])
 
-    useEffect(() => {
-        shuffleThat();
-    }, [dictionary])
+useEffect(() => {
+    shuffleThat();
+},[isGameEnded])
 
-  const checkShuffle:string = shuffled !== undefined ? `Translate ${shuffled[pace]?.word} to English` : 'Something went wrong'
+    useEffect(() => {
+        console.log(shuffled[pace])
+    })
+
+  const checkShuffle:string = shuffled !== undefined ? `Translate ${shuffled[pace]?.word} to English` : 'Something went wrong';
 
     return(
         <View style={[styles.root, {backgroundColor: 'teal', justifyContent: 'flex-start',}]}>
-           
             <View style={{alignItems: 'center', marginBottom: 20}}>
             <Text style={{marginBottom: 10}}>Welcome to the trivia</Text>
             <Button onPress={() => dispatch(setGameStarted(false))} title='Cancel the trivia'/>
             </View>
            <View style={styles.triviaWrapper}>
            <Text style={{marginBottom: 10, fontSize: 25}}>{checkShuffle}</Text>
-           <WordCards/>
+            {shuffled[pace] !== undefined && <WordCards current={shuffled[pace]}/>}
            </View>
         </View>
-          
     )
 }
 

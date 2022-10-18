@@ -7,27 +7,30 @@ import { IWordListItem } from '../../types/reduxTypes';
 
 import WordSingleCard from './WordSingleCard';
 
-const WordCards = () => {
+interface WordCardsProps {
+    current : IWordListItem
+}
+
+const WordCards = ( {current} : WordCardsProps ) => {
 
 const dictionary = useSelector( (state:RootState) => state.wordsReducer.words);
 const pace = useSelector( (state:RootState) => state.wordsReducer.pace);
-const shuffled = useSelector( (state:RootState) => state.wordsReducer.shuffeledWords);
 
 const [answers, setAnswers] = useState<IWordListItem[]>([]);
 
-const answersHandler = ():void  => {
-    const softerdArray:IWordListItem[] = [...dictionary].filter( el => el.word !== shuffled[pace]?.word);
+const ansverHandler = ():void => {
+    const softerdArray:IWordListItem[] = [...dictionary].filter( el => el.word !== current?.word);
     const randomlyShuffeledArray:IWordListItem[] = randomSorterFunction(softerdArray);
-    const questionsArray:IWordListItem[] = randomSorterFunction([...randomlyShuffeledArray.slice(0,3), ...[shuffled[pace]]]);
+    const questionsArray:IWordListItem[] = randomSorterFunction([...randomlyShuffeledArray.slice(0,3), ...[current]]);
     setAnswers(questionsArray);
 }
 
 useEffect(() => {
-    answersHandler();
+    ansverHandler();
 },[])
 
 useEffect(() => {
-    answersHandler();
+    ansverHandler();
 }, [pace])
 
     return(
