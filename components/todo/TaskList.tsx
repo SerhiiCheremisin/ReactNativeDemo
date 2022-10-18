@@ -1,24 +1,29 @@
 import { Alert, Modal, StyleSheet, Text, Pressable, View, TextInput, Button, FlatList } from "react-native";
+import { useSelector, useDispatch } from 'react-redux';
+import { setTodos } from "../../redux/reducers/todoReducer";
 
-const TaskList = (props) => {
+import { RootState, AppDispatch } from "../../redux/reduxStore";
 
-  const { tasks, setTasks } = props;
+const TaskList = ():JSX.Element => {
 
-  const deleteHandler = (task) => {
-    const newStateArray = [...tasks].filter(element => element.id !== task.id);
-    setTasks(newStateArray);
+  const todosList = useSelector( (state:RootState) => state.todoReducer.todos);
+  const dispatch:AppDispatch = useDispatch();
+
+  const deleteHandler = (taskId:string):void => {
+    const newStateArray = [...todosList].filter(element => element.id !== taskId);
+    dispatch(setTodos(newStateArray));
   }
 
   return(
     <View style={styles.taskWrapper}>
     <FlatList
-     data={tasks}
+     data={todosList}
      keyExtractor={item => item.id}
      renderItem={(itemData) => {
         return (
             <View style={styles.taskItem}>
             <Text style={styles.text}>{itemData.item.task}</Text>
-            <Button onPress={() => deleteHandler(itemData.item)} title="DELETE" /> 
+            <Button onPress={() => deleteHandler(itemData.item.id)} title="DELETE" /> 
             </View>
         )
      }}

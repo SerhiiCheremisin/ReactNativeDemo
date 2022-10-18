@@ -1,39 +1,50 @@
 import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import { Alert, Modal, StyleSheet, Text, Pressable, View, TextInput, Button } from "react-native";
+import { useSelector, useDispatch } from 'react-redux';
+import { setTodos } from "../../redux/reducers/todoReducer";
 
-const ModalTaskAdder = (props) => {
-    const {setModalInactive, modalStatus, setTasks} = props;
-    const [taskText, setTaskTest] = useState('');
+import { ITodo } from '../../types/reduxTypes';
+import { RootState, AppDispatch } from "../../redux/reduxStore";
 
-    const sloseModal= () => {
+interface IModalTaskAdderProps {
+  setModalInactive: Function,
+  modalStatus: boolean
+}
+
+const ModalTaskAdder = ( {setModalInactive, modalStatus } : IModalTaskAdderProps ): JSX.Element => {
+    const [taskText, setTaskTest] = useState<string>('');
+    const todosList = useSelector( (state:RootState) => state.todoReducer.todos);
+    const dispatch: AppDispatch = useDispatch();
+
+    const sloseModal= ():void => {
         setModalInactive(false);
     }
 
-    const addNewTask = () => {
+    const addNewTask = ():void => {
       if (taskText === '') {
-        const newTask = {
+        const newTask : ITodo = {
           id: uuidv4(),
           task: 'You should add something next time'
         }
-        setTasks(current => [...current, newTask]);
+        dispatch(setTodos([...todosList, newTask]));
         setModalInactive(false);
         return
       }
-      const newTask = {
+      const newTask:ITodo = {
         id: uuidv4(),
         task: taskText
       }
-      setTasks(current => [...current, newTask]);
+      dispatch(setTodos([...todosList, newTask]));
       setModalInactive(false);
     }
 
-    const onChangeTaskHandler = (text) => {
+    const onChangeTaskHandler = (text:string):void => {
       setTaskTest(text);
     }
     
     return(
-           <Modal visible={modalStatus} animated='slide'>
+           <Modal visible={modalStatus} animationType='slide'>
             <View style={styles.modalWrapper} >
             <View style={styles.textInput} >
              <TextInput value={taskText} onChangeText={onChangeTaskHandler} placeholder="Add a new Task"/>

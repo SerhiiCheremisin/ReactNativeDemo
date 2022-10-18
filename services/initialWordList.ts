@@ -1,0 +1,27 @@
+import { IWordListItem } from '../types/reduxTypes';
+
+export const initialWordList:IWordListItem[] =  [
+    {word: 'ponedeljek', translation: 'Monday'},
+    {word: 'torek', translation: 'Tuesday'},
+    {word: 'sreda', translation: 'Wednesday'},
+    {word: 'četrtek', translation: 'Thursday'},
+    {word: 'petek', translation: 'Friday'},
+    {word: 'sobota', translation: 'Saturday'},
+    {word: 'nedelja', translation: 'Sunday'},
+    {word: 'januar', translation: 'January'},
+    {word: 'februar', translation: 'February'},
+    {word: 'marec', translation: 'March'},
+    {word: 'april', translation: 'April'},
+    {word: 'maj', translation: 'May'},
+    {word: 'junij', translation: 'June'},
+    {word: 'julij', translation: 'July'},
+    {word: 'avgust', translation: 'August'},
+    {word: 'september', translation: 'September'},
+    {word: 'oktober', translation: 'October'},
+    {word: 'november', translation: 'November'},
+    {word: 'december', translation: 'December'},
+    {word: 'pomlad', translation: 'spring'},
+    {word: 'poletje', translation: 'summer'},
+    {word: 'jesen', translation: 'autumn'},
+    {word: 'zima', translation: 'winter'},
+]

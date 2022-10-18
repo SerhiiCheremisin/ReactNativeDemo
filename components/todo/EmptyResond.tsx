@@ -1,6 +1,6 @@
 import { Alert, Modal, StyleSheet, Text, Pressable, View, TextInput, Button, FlatList } from "react-native";
 
-const EmptyRespond = () => {
+const EmptyRespond = ():JSX.Element => {
     return(
         <View style={styles.content}>
             <Text style={styles.text}>There are no active tasks </Text>
