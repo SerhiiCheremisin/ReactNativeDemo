@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Button, Pressable, ScrollView, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Button, Pressable, ScrollView, FlatList, useWindowDimensions } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { setGameStarted } from '../../redux/reducers/wordsReducer';
@@ -14,6 +14,8 @@ const Dictionary = ():JSX.Element => {
    
     const dictionary = useSelector( (state:RootState) => state.wordsReducer.words);
     const dispatch:AppDispatch = useDispatch()
+
+    const { height, width } = useWindowDimensions();
 
     const [isModalOpen, setIsModalOpen] = useState(false)
     

@@ -1,4 +1,4 @@
-import { Alert, Modal, StyleSheet, Text, Pressable, View, TextInput, Button, FlatList } from "react-native";
+import { Alert, Modal, StyleSheet, Text, Pressable, View, TextInput, Button, FlatList, useWindowDimensions } from "react-native";
 import { useSelector, useDispatch } from 'react-redux';
 import { setTodos } from "../../redux/reducers/todoReducer";
 
@@ -9,13 +9,17 @@ const TaskList = ():JSX.Element => {
   const todosList = useSelector( (state:RootState) => state.todoReducer.todos);
   const dispatch:AppDispatch = useDispatch();
 
+  const { width, height } = useWindowDimensions();
+
   const deleteHandler = (taskId:string):void => {
     const newStateArray = [...todosList].filter(element => element.id !== taskId);
     dispatch(setTodos(newStateArray));
   }
 
+  const listWidth = width >= 400 ? 800 : 400;
+
   return(
-    <View style={styles.taskWrapper}>
+    <View style={[styles.taskWrapper, , {width: listWidth}]}>
     <FlatList
      data={todosList}
      keyExtractor={item => item.id}
@@ -33,7 +37,6 @@ const TaskList = ():JSX.Element => {
 }
 const styles = StyleSheet.create({
    taskWrapper : {
-    width: 400,
     paddingTop: 10,
     paddingHorizontal: 10,
    },

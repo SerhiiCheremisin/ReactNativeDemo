@@ -2,6 +2,7 @@ export const commonButton:object = {
     marginBottom: 15,
     backgroundColor: 'green',
     width: 180,
+    height: 50,
     borderRadius: 10,
     paddingHorizontal: 5,
     paddingVertical: 15,

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Button, Pressable, Modal, SafeAreaView, TextInput, Alert } from 'react-native';
+import { StyleSheet, Text, View, Button, Pressable, Modal, SafeAreaView, TextInput, Alert, useWindowDimensions  } from 'react-native';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '../../redux/reduxStore';
@@ -18,6 +18,10 @@ const ModalWordAdder = ( { setModal, isVisible }: IModalWordAdderProps) => {
   const dispatch:AppDispatch = useDispatch();
   const [sloWord, setSloWord] = useState<string>('');
   const [engWord, setEngWord] = useState<string>('');
+
+  const { height, width } = useWindowDimensions();
+
+  const widthModal = width>=400 ? 5 : 0
 
   const sloHandler = (text:string):void => {
     setSloWord(text);
@@ -57,7 +61,7 @@ const aderHandler = ():void => {
 
     return(
         <Modal visible={isVisible} animationType='slide'>
-            <View style={[styles.root, {backgroundColor: '#e1e9e8'}]}> 
+            <View style={[styles.root, {backgroundColor: '#e1e9e8', paddingTop: widthModal}]}> 
             <Text style={styles.text}>Add a new word</Text>
             <SafeAreaView>
                <TextInput 

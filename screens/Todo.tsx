@@ -1,7 +1,8 @@
 import {useState, useEffect} from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, useWindowDimensions } from 'react-native';
 import { setTodos } from '../redux/reducers/todoReducer';
 import { useSelector, useDispatch } from 'react-redux';
+
 
 import ModalTaskAdder from '../components/todo/ModalTaskAdder';
 import TaskList from '../components/todo/TaskList';
@@ -18,9 +19,20 @@ import { RootState, AppDispatch } from '../redux/reduxStore';
 const Todo = ():JSX.Element =>  {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { height, width } = useWindowDimensions();
 
   const todosList = useSelector( (state:RootState) => state.todoReducer.todos)
   const dispatch:AppDispatch = useDispatch();
+
+  const rootAdditionalStyle = () => {
+      if (width >= 400) {
+        return {
+          backgroundColor: 'gray',
+          paddingTop: 20,
+        }
+      }
+      return {backgroundColor: '#212121'}
+  }
 
   useEffect(() => {
     setStorageValue('todoList', JSON.stringify(todosList))
@@ -47,7 +59,7 @@ useEffect(() => {
   }
 
   return (
-    <View style={[styles.root,  {backgroundColor: '#212121'}]}>
+    <View style={[styles.root, rootAdditionalStyle()]}>
        {isModalOpen && <ModalTaskAdder modalStatus={isModalOpen} setModalInactive={setIsModalOpen}/>}
        <View style={styles.taskAdder}> 
          <Button onPress={modalOpener} title='Add a new task'/>
